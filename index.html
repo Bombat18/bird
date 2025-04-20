@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Basic Meta Tags -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+  <!-- SEO Meta Tags -->
+  <title>Flappy Bird Game - Play Online for Free</title>
+  <meta name="description"
+    content="Play Flappy Bird online – a fun and addictive HTML5 game built with canvas and JavaScript. No downloads needed, just tap and fly!" />
+  <meta name="keywords"
+    content="Flappy Bird, HTML5 game, JavaScript game, play online, canvas game, web game, fun games, tap game" />
+  <meta name="author" content="Ramya" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://yourdomain.com/flappybird" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Squada+One&display=swap" rel="stylesheet" />
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <nav class="navbar">
+    <div class="nav-brand">FlappyBird</div>
+
+    <!-- Font Awesome hamburger icon -->
+    <div class="nav-toggle" id="navToggle">
+      <i class="fas fa-bars"></i>
+    </div>
+
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#" data-page="home">Home</a></li>
+      <li><a href="#" data-page="about">About</a></li>
+      <li><a href="#" data-page="how-to-play">How to Play</a></li>
+      <li><a href="#" data-page="privacy-policy">Privacy Policy</a></li>
+      <button id="themeToggle" class="theme-toggle-btn">
+        <i class="fas fa-moon"></i>
+      </button>
+    </ul>
+  </nav>
+
+  <!-- Layout -->
+  <div class="layout">
+    <div class="ad left-ad">Left Ads</div>
+
+    <div class="game-area">
+      <canvas id="canvas" width="276" height="414" aria-label="Flappy Bird Canvas Game"></canvas>
+    </div>
+
+    <div class="ad right-ad">Right Ads</div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>&copy; 2025 FlappyBird. All Rights Reserved. | Built by Ramya</p>
+  </footer>
+
+  <!-- Modal for displaying page content -->
+  <div id="popupModal" class="modal">
+    <div class="modal-content">
+      <span id="closeModal" class="close">&times;</span>
+      <div id="page-content"></div>
+    </div>
+  </div>
+
+  <!-- JavaScript -->
+  <script src="game.js"></script>
+
+  <script>
+    const navToggle = document.getElementById('navToggle');
+    const navLinks = document.getElementById('navLinks');
+    const pageContent = document.getElementById('page-content');
+    const popupModal = document.getElementById('popupModal');
+    const closeModal = document.getElementById('closeModal');
+
+    // Toggle nav popup on hamburger click
+    navToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('show');
+    });
+
+    const pages = {
+      home: `
+    <div class="popup-content">
+      <h1>Welcome to FlappyBird</h1>
+      <p>Enjoy the addictive arcade-style game that took the world by storm!</p>
+      <p>Click the canvas or press the <strong>spacebar</strong> to flap your bird and avoid the pipes. Try to beat your high score and challenge your friends!</p>
+    </div>
+  `,
+      about: `
+    <div class="popup-content">
+      <h1>About FlappyBird</h1>
+     
+      <p>This is a fan-made version of the popular Flappy Bird game recreated using modern web technologies like <strong>HTML5 Canvas</strong>, <strong>CSS</strong>, and <strong>JavaScript</strong>.</p>
+      <p>It’s a fun project built with passion and for educational purposes by <strong>Ramya</strong>.</p>
+      <p>We aim to keep it lightweight, fast, and accessible on all devices.</p>
+    </div>
+  `,
+      'how-to-play': `
+    <div class="popup-content">
+      <h1>How to Play</h1>
+      <ul>
+        <li>Tap anywhere on the screen or press <strong>Spacebar</strong> to make the bird flap upward.</li>
+        <li>Avoid colliding with pipes and the ground.</li>
+        <li>Each pipe you pass earns you 1 point.</li>
+        <li>Try to beat your high score every time you play!</li>
+      </ul>
+      <p>Tip: Stay calm and time your flaps carefully!</p>
+    </div>
+  `,
+      'privacy-policy': `
+    <div class="popup-content">
+      <h1>Privacy Policy</h1>
+      <p>This game is built for fun and does <strong>not collect</strong> or store any personal data.</p>
+      <p>It runs completely in your browser and does not use cookies or third-party trackers.</p>
+      <p>Your game data, like high score, may be saved locally in your browser storage.</p>
+    </div>
+  `
+    };
+
+
+    // Handle clicks for page navigation
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault(); // prevent default anchor behavior
+        const page = link.getAttribute('data-page');
+        if (pages[page]) {
+          pageContent.innerHTML = pages[page];
+          popupModal.style.display = 'block'; // Show the modal
+        }
+      });
+    });
+
+    // Close the modal when the user clicks the 'x' button
+    closeModal.addEventListener('click', () => {
+      popupModal.style.display = 'none';
+    });
+
+    // Close the modal if the user clicks outside the modal content
+    window.addEventListener('click', (e) => {
+      if (e.target === popupModal) {
+        popupModal.style.display = 'none';
+      }
+    });
+  </script>
+
+  <script>
+    const themeToggle = document.getElementById('themeToggle');
+    const body = document.body;
+
+    // Set default or remembered mode
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+      body.classList.add(savedTheme);
+    } else {
+      body.classList.add('light-mode');
+    }
+
+    themeToggle.addEventListener('click', () => {
+      body.classList.toggle('dark-mode');
+      body.classList.toggle('light-mode');
+
+      // Save the theme mode
+      const currentTheme = body.classList.contains('dark-mode') ? 'dark-mode' : 'light-mode';
+      localStorage.setItem('theme', currentTheme);
+
+      // Change icon based on mode
+      themeToggle.innerHTML = body.classList.contains('dark-mode')
+        ? '<i class="fas fa-sun"></i>'
+        : '<i class="fas fa-moon"></i>';
+    });
+
+    // Update icon on load
+    themeToggle.innerHTML = body.classList.contains('dark-mode')
+      ? '<i class="fas fa-sun"></i>'
+      : '<i class="fas fa-moon"></i>';
+  </script>
+</body>
+
+</html>
