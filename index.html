@@ -6,6 +6,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<link rel="icon" type="image/x-icon" href="img/bird/fabicon.jpg
+\">
 
   <!-- SEO Meta Tags -->
   <title>Flappy Bird Game - Play Online for Free</title>
@@ -43,7 +45,7 @@
       <li><a href="#" data-page="how-to-play">How to Play</a></li>
       <li><a href="#" data-page="privacy-policy">Privacy Policy</a></li>
       <button id="themeToggle" class="theme-toggle-btn">
-        <i class="fas fa-moon"></i>
+        <i class="fas fa-sun"></i>
       </button>
     </ul>
   </nav>
@@ -161,27 +163,27 @@
     if (savedTheme) {
       body.classList.add(savedTheme);
     } else {
-      body.classList.add('light-mode');
+      body.classList.add('dark-mode');
     }
 
     themeToggle.addEventListener('click', () => {
-      body.classList.toggle('dark-mode');
       body.classList.toggle('light-mode');
+      body.classList.toggle('dark-mode');
 
       // Save the theme mode
-      const currentTheme = body.classList.contains('dark-mode') ? 'dark-mode' : 'light-mode';
+      const currentTheme = body.classList.contains('light-mode') ? 'light-mode' : 'dark-mode';
       localStorage.setItem('theme', currentTheme);
 
       // Change icon based on mode
-      themeToggle.innerHTML = body.classList.contains('dark-mode')
-        ? '<i class="fas fa-sun"></i>'
-        : '<i class="fas fa-moon"></i>';
+      themeToggle.innerHTML = body.classList.contains('light-mode')
+        ? '<i class="fas fa-moon"></i>'
+        : '<i class="fas fa-sun"></i>';
     });
 
     // Update icon on load
-    themeToggle.innerHTML = body.classList.contains('dark-mode')
-      ? '<i class="fas fa-sun"></i>'
-      : '<i class="fas fa-moon"></i>';
+    themeToggle.innerHTML = body.classList.contains('light-mode')
+      ? '<i class="fas fa-moon"></i>'
+      : '<i class="fas fa-sun"></i>';
   </script>
 </body>
 
